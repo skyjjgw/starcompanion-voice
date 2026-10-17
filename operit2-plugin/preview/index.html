@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>星伴 · 设计预览</title><link rel="stylesheet" href="/preview.css"></head>
+<body>
+  <aside>
+    <p class="eyebrow">STARCOMPANION / DESIGN</p><h1>先把体验设计好。</h1>
+    <p class="intro">直接调整界面、切换状态。这里使用模拟数据，先看效果和操作是否顺手。</p>
+    <label>角色<select id="role"><option>林澈</option><option>许知夏</option></select></label>
+    <label>预览尺寸<select id="viewport"><option value="phone">完整手机页面</option><option value="dialog">Operit 通话小窗口</option></select></label>
+    <p class="label">查看状态</p>
+    <div id="states" class="states">
+      <button data-state="ready">准备</button><button data-state="listening">聆听</button>
+      <button data-state="thinking">回复中</button><button data-state="speaking">播放中</button>
+      <button data-state="muted">静音</button><button data-state="error">异常提示</button>
+      <button data-state="ended">已结束</button>
+    </div>
+    <label class="toggle"><input type="checkbox" id="auto" checked> 修改代码后自动刷新</label>
+    <button id="reset" class="reset">重新开始预览</button>
+    <p id="reload-status" role="status">正在加载预览…</p>
+    <p class="note">复用插件的同一份 HTML、样式和组件。模拟回复不会保存到聊天，也不会申请麦克风权限。</p>
+  </aside>
+  <main><div class="preview-badge"><span></span>设计预览 · 模拟对话</div>
+    <div id="device-holder"><section id="device" class="device">
+      <div class="device-top"><span>9:41</span><span>● ● ▰</span></div>
+      <div class="window-title">星伴语音通话</div>
+      <iframe id="phone" src="/phone" title="星伴通话界面预览"></iframe>
+      <footer><button id="hangup">挂断并返回</button></footer>
+      <div class="home-indicator"></div>
+    </section></div>
+    <p class="stage-note">先确定布局、玻璃质感和交互，再接入实际服务。</p>
+  </main>
+  <script src="/workbench.js"></script>
+</body></html>

@@ -12,8 +12,11 @@ Operit 适配器继续保留。实际兼容性与验证边界见
 
 ## 改动与同步
 
+- 界面先在 `design/voice-preview` 分支通过 `operit2-plugin/preview/` 的本机预览迭代，
+  设计确认后再集成到维护分支。日常设计只做相关的轻量检查；打包、安卓安装、真实服务
+  和完整验收放在集成或明确要求内测安装包时进行。详见[设计预览](../operit2-plugin/preview/README.md)。
 - 每个可交付改动包含相应源码、测试及必要说明，检查暂存差异后提交，再普通推送到个人 fork。
-- 本地 `origin` 指向个人 fork，`upstream` 指向官方 erpan；日常 `git push` 只推维护分支。
+- 本地 `origin` 指向个人 fork，`upstream` 指向官方 erpan；设计推送设计分支，集成后推维护分支。
 - 维护分支推送和 PR 运行原有 Node 检查及新增插件的 SDK 类型、构建、行为与归档检查。
   只有实际运行过的 Android 构建、出声、连续对话
   和打断测试才可记录为通过；Node 检查不等于已完成手机音频验收。

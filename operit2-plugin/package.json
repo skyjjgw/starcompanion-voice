@@ -6,6 +6,8 @@
   "license": "MIT",
   "engines": { "node": ">=20" },
   "scripts": {
+    "preview": "node preview/server.mjs",
+    "preview:check": "node --test preview/server.test.mjs",
     "build": "node scripts/build.mjs",
     "pack:toolpkg": "node scripts/build.mjs",
     "typecheck": "node scripts/build.mjs --check",
