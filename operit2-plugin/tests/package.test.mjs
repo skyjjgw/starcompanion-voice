@@ -4,6 +4,7 @@ import { mkdir, mkdtemp, writeFile, readFile, rm, utimes } from 'node:fs/promise
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import vm from 'node:vm';
+import { createRequire } from 'node:module';
 import { buildPlugin, createArchive, verifyArchive, crc32, inlineDocument, loadTools } from '../scripts/build.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -48,6 +49,25 @@ test('real TypeScript/esbuild build produces loadable CJS and executable offline
   for (const script of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) vm.runInContext(script[1], context);
   assert.equal(context.fixtureResult, 42);
   for (const name of ['src/main.ts', 'web/audio-core.mjs', 'README.md', 'LICENSE']) assert(entries.has(name));
+});
+
+test('a clean SDK and dependency-free fixture use the build tool installation', async t => {
+  const folder = await fixture(t), toolsRoot = path.join(folder, 'installed-build-tools'), cleanSdk = path.join(folder, 'clean-sdk');
+  const require = createRequire(import.meta.url);
+  for (const name of ['typescript', 'esbuild']) {
+    const entry = require.resolve(name, { paths: [path.join(root, 'node_modules'), path.join(source, '.ci-tools/typescript/node_modules'), path.join(source, 'plugins/packages/buildin/workflow/node_modules')] });
+    const installed = path.join(toolsRoot, 'node_modules', name);
+    await mkdir(installed, { recursive: true });
+    await writeFile(path.join(installed, 'package.json'), JSON.stringify({ name, main: 'index.cjs' }));
+    await writeFile(path.join(installed, 'index.cjs'), `module.exports = require(${JSON.stringify(entry)});\n`);
+  }
+  await mkdir(path.join(cleanSdk, 'plugins/types'), { recursive: true });
+  await writeFile(path.join(cleanSdk, 'plugins/types/index.d.ts'), '// Clean SDK fixture: no cached build tools.\n');
+  const result = await buildPlugin({ root: folder, source: cleanSdk, toolsRoot });
+  const entries = verifyArchive(await readFile(result.output));
+  const module = { exports: {} };
+  vm.runInNewContext(entries.get('dist/main.js').toString(), { module, exports: module.exports });
+  assert.equal(module.exports.registerToolPkg(), true);
 });
 
 test('two builds ignore source mtimes and produce identical ZIP bytes and hashes', async t => {

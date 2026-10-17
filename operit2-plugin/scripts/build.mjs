@@ -25,11 +25,11 @@ function operitRoot(root, override) {
 }
 
 /** Load installed build tools only; this function never installs dependencies. */
-export function loadTools(sourceRoot, root = defaultRoot) {
+export function loadTools(sourceRoot, root = defaultRoot, toolsRoot = defaultRoot) {
   const require = createRequire(path.join(root, 'package.json'));
   function load(name) {
     const candidates = name === 'typescript' ? [path.join(sourceRoot, '.ci-tools/typescript/node_modules/typescript')] : [];
-    candidates.push(path.join(root, 'node_modules', name), path.join(sourceRoot, 'plugins/packages/buildin/workflow/node_modules', name));
+    candidates.push(path.join(root, 'node_modules', name), path.join(toolsRoot, 'node_modules', name), path.join(sourceRoot, 'plugins/packages/buildin/workflow/node_modules', name));
     for (const candidate of candidates) if (existsSync(path.join(candidate, 'package.json'))) return require(candidate);
     throw new Error(`Build dependency ${name} is unavailable. Run npm ci in this plugin or set OPERIT2_SOURCE to the existing Operit2 checkout.`);
   }
@@ -179,9 +179,9 @@ export function verifyArchive(archive, expected) {
   return result;
 }
 
-export async function buildPlugin({ root = defaultRoot, source, output, checkOnly = false } = {}) {
+export async function buildPlugin({ root = defaultRoot, source, output, checkOnly = false, toolsRoot = defaultRoot } = {}) {
   root = path.resolve(root);
-  const sourceRoot = operitRoot(root, source), { ts, esbuild } = loadTools(sourceRoot, root);
+  const sourceRoot = operitRoot(root, source), { ts, esbuild } = loadTools(sourceRoot, root, toolsRoot);
   checkProject(root, sourceRoot, ts);
   if (checkOnly) return { typecheck: 'passed' };
   const files = await captureInputs(root), manifest = JSON.parse(files.get('manifest.json').toString());
