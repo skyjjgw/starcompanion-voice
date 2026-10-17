@@ -1,3 +1,19 @@
+# 星伴语音 · StarCompanion Voice
+
+这是 [qfyingque/erpan](https://github.com/qfyingque/erpan) 的公开 fork，由
+[skyjjgw/starcompanion-voice](https://github.com/skyjjgw/starcompanion-voice) 的
+`starcompanion` 分支维护；初始上游提交为 `1032a4f4b4afdb28f05e0568c3c4cfb1a6bbb5fb`。
+
+本项目以 **Operit 语音通话插件适配** 为目标，配套星伴主仓库
+[starcompanion-operit2](https://github.com/skyjjgw/starcompanion-operit2)。当前阶段是保留
+原语音客户端、插件与测试并建立公开开发基线，**尚未完成或验证 Operit2 适配**。
+下方原版安装步骤针对上游已注明的 Operit 版本，不能视为 Operit2 已可直接导入使用。
+
+保留 Erpan contributors、LiveKit 的 MIT 许可与所有组件第三方声明。协作和后续同步见
+[维护约定](docs/starcompanion-maintenance.md)。上游原说明保留如下。
+
+---
+
 # 耳畔 · erpan
 
 **在手机上和 AI 语音通话，不占住你的屏幕。**
