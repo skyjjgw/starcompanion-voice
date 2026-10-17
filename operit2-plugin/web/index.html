@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>星伴语音通话</title>
+  <style>/* STARCOMPANION_STYLES */</style>
+</head>
+<body>
+  <main class="call-shell">
+    <header><span class="brand">星伴 · 语音</span><span id="timer" class="timer">前台通话</span></header>
+    <section class="identity"><div id="avatar" class="avatar">伴</div><h1 id="title">语音通话</h1><p id="status" role="status" aria-live="polite">正在连接插件…</p></section>
+    <div id="wave" class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <section id="configuration" class="glass configuration">
+      <label id="chat-label" hidden>选择已有对话<select id="chat"></select></label>
+      <label>本次通话声音<select id="voice"><option value="">使用全局声音</option></select></label>
+      <p class="small">沿用当前对话的角色、模型、记忆和工具。声音使用全局配置或手动选择。</p>
+    </section>
+    <section class="glass captions" aria-label="通话字幕"><p class="caption-label">对话字幕</p><p id="user-caption" class="user-caption">开始后，说完一句会自动发送。</p><p id="reply-caption" class="reply-caption" aria-live="polite">可以随时说话打断播放。</p></section>
+    <p id="notice" class="notice" role="alert"></p>
+    <form id="text-form" class="text-form" hidden><label class="sr-only" for="text-input">输入要说的话</label><textarea id="text-input" rows="2" maxlength="8000" placeholder="输入要说的话…"></textarea><button type="submit" id="text-send">发送</button></form>
+    <nav class="controls" aria-label="通话控制"><button id="mute" class="round secondary" disabled><span aria-hidden="true">◉</span><small>静音</small></button><button id="start" class="round primary"><span aria-hidden="true">◖◗</span><small>开始通话</small></button><button id="keyboard" class="round secondary"><span aria-hidden="true">⌨</span><small>键盘输入</small></button></nav>
+    <p class="footnote">仅在此页面前台运行 · 音频输出跟随系统<br>关闭请使用下方「挂断并返回」</p>
+    <details><summary>配置与权限</summary><p>请先在 Operit 设置中配置语音识别（STT）与支持音频合成的语音（TTS）。首次通话需要你在 Android 系统中允许本应用使用麦克风。插件不会自动授予权限。录音按短句发送，单句最长 15 秒；识别、回复和合成由所选服务处理。</p><p id="diagnostics">等待页面检查</p></details>
+  </main>
+  <script>/* STARCOMPANION_AUDIO_CORE */</script>
+  <script>/* STARCOMPANION_APP */</script>
+</body>
+</html>

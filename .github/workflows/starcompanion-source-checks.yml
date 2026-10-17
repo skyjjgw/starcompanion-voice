@@ -25,3 +25,19 @@ jobs:
           node-version: "22"
       - name: Check mobile voice contracts
         run: node --test tests/*.test.mjs
+      - name: Check out pinned Operit2 SDK
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: AAswordman/Operit2
+          ref: e592f9b3da1a601fd219f2d2be7b4e4ed75d3149
+          path: _operit2-sdk
+          persist-credentials: false
+      - name: Install plugin build dependencies
+        run: npm ci --prefix operit2-plugin --ignore-scripts
+      - name: Check and package Operit2 voice plugin
+        env:
+          OPERIT2_SOURCE: ${{ github.workspace }}/_operit2-sdk
+          STARCOMPANION_VOICE_BUILD_CACHE: ${{ runner.temp }}/starcompanion-voice-build-cache
+        run: |
+          node operit2-plugin/scripts/build.mjs --output "$RUNNER_TEMP/StarCompanion-Voice-0.1.0.toolpkg"
+          node --test operit2-plugin/tests/*.test.mjs

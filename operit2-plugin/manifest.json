@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "toolpkg_id": "com.skymoni.voice_calls",
+  "version": "0.1.0",
+  "api_version": "2.0.0",
+  "main": "dist/main.js",
+  "display_name": { "zh": "星伴语音通话", "en": "Star Companion Voice Calls" },
+  "description": {
+    "zh": "在当前角色会话中进行前台语音通话。需自行配置语音服务并授权麦克风。",
+    "en": "Foreground voice calls in the selected character conversation. Requires configured speech services and microphone permission."
+  },
+  "enabled_by_default": false,
+  "subpackages": [],
+  "resources": [
+    { "key": "voice_web", "path": "resources/voice.html", "mime": "text/html" }
+  ]
+}

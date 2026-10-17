@@ -5,9 +5,14 @@
 `starcompanion` 分支维护；初始上游提交为 `1032a4f4b4afdb28f05e0568c3c4cfb1a6bbb5fb`。
 
 本项目以 **Operit 语音通话插件适配** 为目标，配套星伴主仓库
-[starcompanion-operit2](https://github.com/skyjjgw/starcompanion-operit2)。当前阶段是保留
-原语音客户端、插件与测试并建立公开开发基线，**尚未完成或验证 Operit2 适配**。
-下方原版安装步骤针对上游已注明的 Operit 版本，不能视为 Operit2 已可直接导入使用。
+[starcompanion-operit2](https://github.com/skyjjgw/starcompanion-operit2)。新增独立
+[Operit2 前台通话插件](operit2-plugin/README.md)，在原聊天菜单中提供通话窗口，
+使用原聊天引擎及已有 STT/TTS 配置。构建、设备验证结果和限制见
+[插件验收记录](docs/operit2-voice-plugin-validation.md)。麦克风需要用户主动授权，
+真实语音效果需要配置服务后在手机上验收。
+
+下方保留的原版安装步骤针对上游注明的 Operit 版本；原耳畔客户端的后台、悬浮窗、
+群聊等能力不等于新增 Operit2 插件已经具备这些能力。
 
 保留 Erpan contributors、LiveKit 的 MIT 许可与所有组件第三方声明。协作和后续同步见
 [维护约定](docs/starcompanion-maintenance.md)。上游原说明保留如下。

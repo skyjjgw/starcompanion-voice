@@ -1,0 +1,15 @@
+{
+  "name": "starcompanion-operit2-voice-calls",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "pack:toolpkg": "node scripts/build.mjs",
+    "typecheck": "node scripts/build.mjs --check",
+    "test": "node --test"
+  },
+  "devDependencies": { "esbuild": "0.25.10", "typescript": "5.8.3" }
+}

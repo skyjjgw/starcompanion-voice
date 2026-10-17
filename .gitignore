@@ -20,6 +20,10 @@ local.properties
 *.sqlite
 *.sqlite3
 *.zip
+*.toolpkg
+/operit2-plugin/dist/
+/operit2-plugin/resources/voice.html
+/_operit2-sdk/
 **/node_modules/
 **/__pycache__/
 signing/
